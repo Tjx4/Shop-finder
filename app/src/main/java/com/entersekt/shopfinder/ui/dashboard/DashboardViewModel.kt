@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
-class DashboardViewModel(application: Application, private val SFService: SFService) : BaseVieModel(application) {
+class DashboardViewModel(application: Application, private val sfService: SFService) : BaseVieModel(application) {
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: MutableLiveData<Boolean>
@@ -37,7 +37,7 @@ class DashboardViewModel(application: Application, private val SFService: SFServ
 
     fun getCities(){
         viewModelScope.launch(Dispatchers.IO) {
-            var cities = SFService.getCities()
+            var cities = sfService.getCities()
             withContext(Dispatchers.Main) {
                 if (!cities.isNullOrEmpty()) {
                     _cities.value = cities

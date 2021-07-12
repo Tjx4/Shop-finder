@@ -64,7 +64,6 @@ class DashboardFragment : BaseFragment(), CitiesAdapter.CityClickListener {
         rvCities.visibility = View.GONE
     }
 
-
     private fun onCitiesSet(cities: List<City>) {
         val citiesLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         rvCities?.layoutManager = citiesLayoutManager
