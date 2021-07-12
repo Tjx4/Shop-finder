@@ -22,15 +22,13 @@ class CitiesAdapter(val context: Context, private val cities: List<City>) : Recy
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val city = cities?.get(position)
         holder.cityNameTv.text = city?.name
-        holder.mallsTv.text =
-            "${city?.malls?.size ?: 0} mall${if (city?.malls?.size == 1) "" else "s"}"
+        holder.mallsTv.text = "${city?.malls?.size ?: 0} mall${if (city?.malls?.size == 1) "" else "s"}"
 
         city.malls?.let {
             val mallsLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             mallsLayoutManager.initialPrefetchItemCount = cities?.size
             holder.mallsRv?.layoutManager = mallsLayoutManager
             var mallsAdapter = MallsAdapter(context, it)
-//mallsAdapter.setCityClickListener(this)
             holder.mallsRv?.adapter = mallsAdapter
         }
     }

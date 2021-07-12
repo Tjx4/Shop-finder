@@ -10,7 +10,6 @@ import com.platform45.fx45.base.viewmodel.BaseVieModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.coroutines.CoroutineContext
 
 class DashboardViewModel(application: Application, private val sfService: SFService) : BaseVieModel(application) {
 
@@ -32,19 +31,32 @@ class DashboardViewModel(application: Application, private val sfService: SFServ
 
     fun showLoadingAndGetCities(){
         _isLoading.value = true
-        getCities()
+        showCities()
     }
 
-    fun getCities(){
+    fun showCities(){
         viewModelScope.launch(Dispatchers.IO) {
             var cities = sfService.getCities()
             withContext(Dispatchers.Main) {
-                if (!cities.isNullOrEmpty()) {
-                    _cities.value = cities
-                } else {
-                    _error.value = app.getString(R.string.cities_error)
+                when {
+                    cities.isNullOrEmpty() -> showCachedCities()
+                    else -> cacheAndSetCities(cities)
                 }
             }
+        }
+    }
+
+    fun cacheAndSetCities(cities: List<City>) {
+        _cities.value = cities
+        sfService.cacheData(app, cities)
+    }
+
+    fun showCachedCities() {
+        val cachedCities = sfService.getCacheData(app)
+        if (cachedCities.isNullOrEmpty()) {
+            _error.value = app.getString(R.string.cities_error)
+        } else {
+            _cities.value = cachedCities
         }
     }
 

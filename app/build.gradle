@@ -49,6 +49,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.multidex:multidex:$multidex_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     //Testing
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -56,7 +57,6 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
-
     testImplementation "io.mockk:mockk:1.12.0"
     androidTestImplementation "io.mockk:mockk-android:1.12.0"
     testImplementation "io.mockk:mockk-common:1.12.0"

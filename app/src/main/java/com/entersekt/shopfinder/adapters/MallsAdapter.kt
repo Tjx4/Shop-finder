@@ -28,7 +28,6 @@ class  MallsAdapter(val context: Context, private val malls: List<Mall>) : Recyc
             mallsLayoutManager.initialPrefetchItemCount = malls?.size
             holder.shopsRv?.layoutManager = mallsLayoutManager
             var mallsAdapter = ShopsAdapter(context, it)
-//mallsAdapter.setCityClickListener(this)
             holder.shopsRv?.adapter = mallsAdapter
         }
     }

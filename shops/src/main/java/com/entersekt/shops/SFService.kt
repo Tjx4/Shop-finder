@@ -1,9 +1,11 @@
 package com.entersekt.shops
 
+import android.app.Application
 import com.entersekt.outlets.models.City
 import com.entersekt.outlets.models.Mall
 import com.entersekt.outlets.models.Shop
 import com.entersekt.outlets.retrofit.RetrofitHelper
+import com.entersekt.shops.persistance.sharedPrefs.SharedPrefs
 
 class SFService(private val retrofitHelper: RetrofitHelper) {
 
@@ -65,6 +67,26 @@ class SFService(private val retrofitHelper: RetrofitHelper) {
                 it.shops?.forEach { shop -> shops.add(shop) }
             }
             shops
+        }
+        catch (ex: Exception){
+            null
+        }
+    }
+
+    fun cacheData(application: Application, cities: List<City>) {
+        try {
+             val sharedPrefs = SharedPrefs.getInstance(application)
+            sharedPrefs.cities = cities
+        }
+        catch (ex: Exception){
+
+        }
+    }
+
+     fun getCacheData(application: Application): List<City>? {
+        return try {
+            val sharedPrefs = SharedPrefs.getInstance(application)
+            sharedPrefs.cities
         }
         catch (ex: Exception){
             null
