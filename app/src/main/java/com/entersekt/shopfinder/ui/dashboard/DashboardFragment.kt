@@ -22,7 +22,6 @@ class DashboardFragment : BaseFragment(), CitiesAdapter.CityClickListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        myDrawerController.setTitle(getString(R.string.app_name))
     }
 
     override fun onCreateView(
@@ -38,7 +37,6 @@ class DashboardFragment : BaseFragment(), CitiesAdapter.CityClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Navigation.findNavController(view).currentDestination?.label = getString(R.string.app_name)
         addObservers()
 
         btnRetry.setOnClickListener {
